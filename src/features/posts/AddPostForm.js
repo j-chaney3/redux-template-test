@@ -5,16 +5,18 @@ import { nanoid } from '@reduxjs/toolkit';
 import { postAdded } from './postsSlice';
 
 const AddPostForm = () => {
-    const dispatch = useDispatch()
+	const dispatch = useDispatch();
 	const [title, setTitle] = useState('');
 	const [content, setContent] = useState('');
 
-	const onTitleChanged = e => setTitle(e.target.value);
-	const onContentChanged = e => setContent(e.target.value);
+	//changes the states above for title and content
+	const onTitleChanged = (e) => setTitle(e.target.value);
+	const onContentChanged = (e) => setContent(e.target.value);
 
 	const onSavePostClicked = () => {
-        
 		if (title && content) {
+			//use dispatch to add functionality to the action creater postAdded (imported above)
+			//defined in reducers of postsSlice
 			dispatch(
 				postAdded({
 					id: nanoid(),
@@ -23,6 +25,7 @@ const AddPostForm = () => {
 				})
 			);
 
+			//resets form fields to empty after submitting post
 			setTitle('');
 			setContent('');
 		}
@@ -47,7 +50,7 @@ const AddPostForm = () => {
 					value={content}
 					onChange={onContentChanged}
 				/>
-				<button type='button' onClick={onSavePostClicked}>
+				<button type="button" onClick={onSavePostClicked}>
 					Save Post
 				</button>
 			</form>
